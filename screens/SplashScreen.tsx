@@ -33,18 +33,18 @@ const SplashScreen = () => {
     })
 
     return (
-        <View style={ styles.container }>
+        <View style={ splashScreenStyles.container }>
             {/* Background */}
-            <View style={ styles.container__background }>
+            <View style={ splashScreenStyles.container__background }>
                 <Image
-                    style={ styles.container__background_image }
+                    style={ splashScreenStyles.container__background_image }
                     source={ require( '../assets/images/Splash_Screen_Background.png' ) }
                     resizeMode='cover'
                 />
             </View>
             
             {/* LOGO */}
-            <View style={ styles.container__logo }>
+            <View style={ splashScreenStyles.container__logo }>
                 <Image
                     source={ require( '../assets/images/Dual_Dish_Logo.png' ) }
                     resizeMode='cover'
@@ -52,9 +52,9 @@ const SplashScreen = () => {
             </View>
 
             {/* FOREGROUND SHAPES */}
-            <View style={ styles.container__shapes }>
+            <View style={ splashScreenStyles.container__shapes }>
                 <Image
-                    style={ styles.container__shapes_inner }
+                    style={ splashScreenStyles.container__shapes_inner }
                     source={ require( '../assets/images/Splash_Screen_Foreground_Inner.png' ) }
                     resizeMode='contain'
                 />
@@ -70,44 +70,3 @@ const SplashScreen = () => {
 }
 
 export default SplashScreen
-
-const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        height: '100%',
-        position: 'relative',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    container__background: {
-        width: '100%',
-        height: '100%',
-        flex: 1
-    },
-    container__background_image: {
-        width: '100%',
-        flex: 1,
-        flexDirection: 'column'
-    },
-    container__logo: {
-        height: '100%',
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    },
-    container__shapes: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10
-    },
-    container__shapes_inner: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute'
-    }
-})
