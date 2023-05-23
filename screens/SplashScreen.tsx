@@ -12,7 +12,7 @@ import React, { useEffect } from 'react'
 import { splashScreenStyles } from './SplashScreen.styles'
 import { globalStyles } from '../utils/GlobalStyles'
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
     let rotationValue = new Animated.Value( 0 )
 
     useEffect(() => {
@@ -20,11 +20,16 @@ const SplashScreen = () => {
         Animated.loop(
             Animated.timing( rotationValue, {
             toValue: 1,
-            duration: 1231245000,
+            duration: 5000,
                 easing: Easing.linear,
                 useNativeDriver: false
             })
         ).start()
+
+        setTimeout(() => {
+            navigation.navigate('login')
+        }, 2000)
+
     }, [])
 
     const rotateData = rotationValue.interpolate({
