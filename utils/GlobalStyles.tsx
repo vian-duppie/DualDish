@@ -8,7 +8,6 @@ export const globalStyles = StyleSheet.create({
     // Padding Top For Android Status Bar
     androidSafeArea: {
         flex: 1,
-        // backgroundColor: 'white',
         paddingTop: 
             Platform.OS === 'android' 
             ? StatusBar.currentHeight 
