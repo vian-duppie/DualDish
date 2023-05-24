@@ -20,15 +20,15 @@ export default function App() {
             >
                 <SafeAreaView style={ globalStyles.flexGrowHeight }>
                     <Stack.Navigator
-                        initialRouteName='splash'
+                        initialRouteName='login'
                         screenOptions={{
                             headerShown: false
                         }}
                     >
-                        <Stack.Screen
+                        {/* <Stack.Screen
                             name='splash'
                             component={ SplashScreen }
-                        />
+                        /> */}
 
                         <Stack.Screen
                             name='login'
