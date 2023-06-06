@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native"
 
-export const loginScreenStyles = StyleSheet.create({
+export const registerScreenStyles = StyleSheet.create({
     // Insert styles here
     container: {
-        flex: 1,
+        flex: 1
     },
     container__heroContainer: {
         position: 'relative',
@@ -12,13 +12,13 @@ export const loginScreenStyles = StyleSheet.create({
         marginBottom: 30
     },
     container__heroContainer_Image: {
-        width: '100%',
+        width: '100%'
     },
     container_heroContainer_TextImage: {
         position: 'absolute',
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     container__formContainer: {
         flex: 1,

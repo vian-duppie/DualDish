@@ -5,6 +5,7 @@ import { globalStyles } from './utils/GlobalStyles';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './screens/LoginScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RegisterScreen from './screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -33,6 +34,11 @@ export default function App() {
                         <Stack.Screen
                             name='login'
                             component={ LoginScreen }
+                        />
+
+                        <Stack.Screen
+                            name='register'
+                            component={ RegisterScreen }
                         />
                     </Stack.Navigator>
                 </SafeAreaView>

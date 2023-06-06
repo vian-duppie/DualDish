@@ -1,23 +1,25 @@
-import { View, Text, Image, Dimensions, ImageBackground } from 'react-native'
+import { View, Text, Image, Dimensions, ImageBackground, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Input from '../components/Input'
 import { loginScreenStyles } from './LoginScreen.styles'
 import Button from '../components/Button'
 import LineButton from '../components/LineButton'
 
-const LoginScreen = () => {
+const LoginScreen = ( { navigation } ) => {
 
-    const [ email, setEmail ] = useState(String)
-    const [ password, setPassword ] = useState(String)
+    const [ email, setEmail ] = useState('')
+    const [ password, setPassword ] = useState('')
+
+    // const 
 
     const testFunction = (text: String) => {
         console.log(text)
     }
 
-    const {width} = Dimensions.get('window')
-
     return (
-        <View style={ loginScreenStyles.container }>
+        <ScrollView
+            style={ loginScreenStyles.container }
+        >
             <View style={ loginScreenStyles.container__heroContainer }>
                 <Image
                     style={ loginScreenStyles.container__heroContainer_Image }
@@ -61,12 +63,12 @@ const LoginScreen = () => {
 
                         <LineButton
                             label='Sign Up'
-                            onPress={ () => testFunction("heyfsasf") }
+                            onPress={() => navigation.navigate('register')}
                         />
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>        
     )
 }
 

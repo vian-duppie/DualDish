@@ -26,53 +26,62 @@ const Input = ( props ) => {
                 </Text>
             }
 
-            <View style={ inputStyles.container__inputContainer }>
-                <TextInput
-                    placeholderTextColor='#8F9B8E'
-                    onChangeText={ props.onChangeText }
-                    placeholder={ props.placeholder || 'Enter placeholder' }
-                    secureTextEntry={ props.type == 'password' ? !showPassword : false }
-                    style={{
-                        flex: 1,
-                        fontSize: 15,
-                        justifyContent: 'center',
-                        padding: 12,
-                        paddingLeft: 15,
-                        alignItems: 'flex-start',
-                        borderColor: props.borderColor == 'red' ? '#D46139' : '#314B2F',
-                        borderWidth: 1,
-                        borderRadius: 10
-                    }}
-                    multiline={false}
-                    defaultValue={ props.defaultValue }
-                />
+            <View style={ inputStyles.container__inputContainer}>
+                <View style={ inputStyles.container__inputContainer_input }>
+                    <TextInput
+                        placeholderTextColor='#8F9B8E'
+                        onChangeText={ props.onChangeText }
+                        placeholder={ props.placeholder || 'Enter placeholder' }
+                        secureTextEntry={ props.type == 'password' ? !showPassword : false }
+                        style={{
+                            flex: 1,
+                            fontSize: 15,
+                            justifyContent: 'center',
+                            padding: 12,
+                            paddingLeft: 15,
+                            alignItems: 'flex-start',
+                            borderColor: props.borderColor == 'red' ? '#D46139' : '#314B2F',
+                            borderWidth: 1,
+                            borderRadius: 10
+                        }}
+                        multiline={false}
+                        defaultValue={ props.defaultValue }
+                    />
 
+                    {
+                        props.type == 'password' && 
+                        (
+                            showPassword 
+                            ? 
+                                <TouchableOpacity
+                                    style={ inputStyles.container__inputContainer_svg } 
+                                    onPress={ changePasswordVisibility }
+                                >
+                                    <EyeHide
+                                        size={ 28 }
+                                    />
+                                </TouchableOpacity>
+                            : 
+                                <TouchableOpacity 
+                                    style={ inputStyles.container__inputContainer_svg } 
+                                    onPress={ changePasswordVisibility }
+                                >
+                                    <EyeShow
+                                        size={ 28 }
+                                    />
+                                </TouchableOpacity>
+                        )
+                    }
+                </View>
                 {
-                    props.type == 'password' && 
-                    (
-                        showPassword 
-                        ? 
-                            <TouchableOpacity
-                                style={ inputStyles.container__inputContainer_svg } 
-                                onPress={ changePasswordVisibility }
-                            >
-                                <EyeHide
-                                    size={ 28 }
-                                />
-                            </TouchableOpacity>
-                        : 
-                            <TouchableOpacity 
-                                style={ inputStyles.container__inputContainer_svg } 
-                                onPress={ changePasswordVisibility }
-                            >
-                                <EyeShow
-                                    size={ 28 }
-                                />
-                            </TouchableOpacity>
-                    )
+                    props.error 
+                        && 
+                    <Text style={ inputStyles.container__inputContainer_errorText}>
+                        { props.error }
+                    </Text>
+                    
                 }
             </View>
-
         </View>
     )
 }
