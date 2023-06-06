@@ -6,13 +6,18 @@ import {
     Animated,
     Easing
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useFonts } from 'expo-font'
+import * as Font from 'expo-font'
+
 
 /* Styles */
 import { splashScreenStyles } from './SplashScreen.styles'
 import { globalStyles } from '../utils/GlobalStyles'
 
 const SplashScreen = ({ navigation }) => {
+    const [ fontsLoaded, setFontsLoaded ] = useState( false )
+
     let rotationValue = new Animated.Value( 0 )
 
     useEffect(() => {
@@ -26,11 +31,27 @@ const SplashScreen = ({ navigation }) => {
             })
         ).start()
 
-        setTimeout(() => {
-            navigation.navigate('login')
-        }, 2000)
+        async function loadFont() {
+            await Font.loadAsync({
+                canvasreg: require( '../assets/fonts/CanvaScript-Reg.ttf' )
+            })
 
-    }, [])
+            setFontsLoaded( true )
+        }
+
+        loadFont()
+
+        if( fontsLoaded ) {
+            navigation.navigate('myProfile')
+        } 
+
+        // setTimeout(() => {
+        //     navigation.navigate('login')
+        // }, 2000)
+
+    }, [fontsLoaded])
+
+
 
     const rotateData = rotationValue.interpolate({
         inputRange: [ 0, 1 ],

@@ -6,10 +6,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './screens/LoginScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RegisterScreen from './screens/RegisterScreen';
+import MyProfileScreen from './screens/MyProfileScreen';
+import { useRoute } from '@react-navigation/native';
+import useEffect from 'react'
+import DrawerScreen from './screens/DrawerScreen';
+import * as Font from 'expo-font';
+import { useFonts } from 'expo-font'
 
 const Stack = createNativeStackNavigator()
 
-export default function App() {
+export default function App( { navigation } ) {
+    
     return (
         <NavigationContainer>
             <View style={ 
@@ -39,6 +46,16 @@ export default function App() {
                         <Stack.Screen
                             name='register'
                             component={ RegisterScreen }
+                        />
+
+                        <Stack.Screen
+                            name='myProfile'
+                            component={ MyProfileScreen }
+                        />
+
+                        <Stack.Screen
+                            name='root'
+                            component={ DrawerScreen }
                         />
                     </Stack.Navigator>
                 </SafeAreaView>
