@@ -31,7 +31,7 @@ const Input = ( props ) => {
                     placeholderTextColor='#8F9B8E'
                     onChangeText={ props.onChangeText }
                     placeholder={ props.placeholder || 'Enter placeholder' }
-                    secureTextEntry={ !showPassword }
+                    secureTextEntry={ props.type == 'password' ? !showPassword : false }
                     style={{
                         flex: 1,
                         fontSize: 15,
@@ -39,7 +39,7 @@ const Input = ( props ) => {
                         padding: 12,
                         paddingLeft: 15,
                         alignItems: 'flex-start',
-                        borderColor: '#314B2F',
+                        borderColor: props.borderColor == 'red' ? '#D46139' : '#314B2F',
                         borderWidth: 1,
                         borderRadius: 10
                     }}
