@@ -1,18 +1,15 @@
-import { View, Text, Image, Dimensions, ImageBackground, ScrollView } from 'react-native'
+import { View, Text, Image, Dimensions, ImageBackground, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import Input from '../components/Input'
-import { loginScreenStyles } from './LoginScreen.styles'
-import Button from '../components/Button'
-import LineButton from '../components/LineButton'
+import Input from '../../components/Input'
 import { myProfileScreenStyles } from './MyProfileScreen.styles'
-import Hamburger from '../components/Svg/Hamburger'
-import { useRoute } from '@react-navigation/native'
-import Camera from '../components/Svg/Camera'
-import Edit from '../components/Svg/Edit'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import RightArrow from '../components/Svg/RightArrow'
+import Camera from '../../components/Svg/Camera'
+import RightArrow from '../../components/Svg/RightArrow'
+import { getCurrentUser, signOutUser } from '../../services/firebaseAuth'
 
 const MyProfileScreen = ( { navigation } ) => {
+
+    const user = getCurrentUser()
+
     const [ usernameIsEditable, setUsernameIsEditable ] = useState( false )
 
     const width = Dimensions.get('window').width
@@ -22,11 +19,9 @@ const MyProfileScreen = ( { navigation } ) => {
         setUsernameIsEditable( !usernameIsEditable )
     }
 
-    const route = useRoute()
-    console.log(route.name)
 
     return (
-        <ScrollView contentContainerStyle={ myProfileScreenStyles.container } showsVerticalScrollIndicator>
+        <ScrollView contentContainerStyle={ myProfileScreenStyles.container } showsVerticalScrollIndicator={false}>
             <View style={ myProfileScreenStyles.container__headerContainer}>
                 <Text style={ myProfileScreenStyles.container__headerContainer_text }>
                     My Profile
@@ -44,7 +39,7 @@ const MyProfileScreen = ( { navigation } ) => {
                             position: 'absolute'
                         } 
                     }
-                    source={ require( '../assets/images/Splash_Screen_Background.png' ) }
+                    source={ require( '../../assets/images/Splash_Screen_Background.png' ) }
                     resizeMode='contain'
                 />
 
@@ -56,7 +51,7 @@ const MyProfileScreen = ( { navigation } ) => {
                             opacity: 0.4
                         } 
                     }
-                    source={ require( '../assets/images/ProfileScreen_Shape.png' ) }
+                    source={ require( '../../assets/images/ProfileScreen_Shape.png' ) }
                     resizeMode='contain'
                 />
 
@@ -71,24 +66,27 @@ const MyProfileScreen = ( { navigation } ) => {
                     placeholder='johndoe@gmail.com'
                     // onChangeText={ (value: React.SetStateAction<string>) => setEmail(value) }
                     type='editable'
-                    defaultValue='Vian'
+                    defaultValue={ user.displayName }
                     isEditable={usernameIsEditable}
                     changeEdibality={test}
                 />
 
                 <Input
                     label='Phone Number'
-                    placeholder='johndoe@gmail.com'
+                    placeholder='064 897 1069'
                     // onChangeText={ (value: React.SetStateAction<string>) => setEmail(value) }
                     type='editable'
-                    defaultValue='064 897 1069'
+                    defaultValue={ user.phoneNumber }
                     isEditable={usernameIsEditable}
                     changeEdibality={test}
                 />
             </View>
 
             <View style={ myProfileScreenStyles.container__actionsContainer } >
-                <TouchableOpacity style={ myProfileScreenStyles.container__actionsContainer_button }>
+                <TouchableOpacity 
+                    style={ myProfileScreenStyles.container__actionsContainer_button }
+                    onPress={ () => signOutUser() }
+                >
                     <Text style={ { color: '#D46139', fontSize: 18 } }>Log Out</Text>
 
                     <RightArrow/>

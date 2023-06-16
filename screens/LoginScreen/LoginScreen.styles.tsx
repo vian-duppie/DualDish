@@ -37,5 +37,11 @@ export const loginScreenStyles = StyleSheet.create({
     container__actionsContainer_lineButtonContainer: {
         flexDirection: 'row',
         gap: 5
-    }
+    },
+    // toast: {
+    //     position: 'absolute',
+    //     bottom: 0,
+    //     justifyContent: 'center',
+    //     alignSelf: 'center'
+    // }
 })

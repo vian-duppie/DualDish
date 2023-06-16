@@ -1,38 +1,45 @@
-import 'react-native-gesture-handler'
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import SplashScreen from './screens/SplashScreen';
-import { globalStyles } from './utils/GlobalStyles';
-import { NavigationContainer } from '@react-navigation/native';
-import LoginScreen from './screens/LoginScreen';
+/* React Native */
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import RegisterScreen from './screens/RegisterScreen';
-import MyProfileScreen from './screens/MyProfileScreen';
-import { useRoute } from '@react-navigation/native';
-import useEffect from 'react'
-import DrawerScreen from './screens/DrawerScreen';
-import * as Font from 'expo-font';
-import { useFonts } from 'expo-font'
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react'
+
+/* Firebase */
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
+/* Screens */
+import SplashScreen from './screens/SplashScreen/SplashScreen';
+import LoginScreen from './screens/LoginScreen/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
+import MyProfileScreen from './screens/MyProfileScreen/MyProfileScreen';
+import CompetitionsScreen from './screens/CompetitionsScreen';
+import CompetitionDetailScreen from './screens/CompetitionDetailScreen';
+
+/* Styling */
+import { globalStyles } from './utlities/GlobalStyles';
 
 const Stack = createNativeStackNavigator()
 
 export default function App( { navigation } ) {
-    
     return (
         <NavigationContainer>
             <View style={ 
                     [ 
                         globalStyles.flexGrowHeight,
-                        globalStyles.androidSafeArea 
-                    ] 
+                        globalStyles.androidSafeArea
+                    ]
                 }
             >
                 <SafeAreaView style={ globalStyles.flexGrowHeight }>
                     <Stack.Navigator
                         initialRouteName='splash'
                         screenOptions={{
-                            headerShown: false
+                            headerShown: false,
+                            contentStyle: { backgroundColor: '#FFFFFF' }
                         }}
                     >
+
                         <Stack.Screen
                             name='splash'
                             component={ SplashScreen }
@@ -47,15 +54,20 @@ export default function App( { navigation } ) {
                             name='register'
                             component={ RegisterScreen }
                         />
-
+                        
                         <Stack.Screen
                             name='myProfile'
                             component={ MyProfileScreen }
                         />
 
                         <Stack.Screen
-                            name='root'
-                            component={ DrawerScreen }
+                            name='competitions'
+                            component={ CompetitionsScreen }
+                        />
+
+                        <Stack.Screen
+                            name='competitionDetail'
+                            component={ CompetitionDetailScreen }
                         />
                     </Stack.Navigator>
                 </SafeAreaView>

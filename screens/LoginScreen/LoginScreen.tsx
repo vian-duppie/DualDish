@@ -1,19 +1,19 @@
 import { View, Text, Image, Dimensions, ImageBackground, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import Input from '../components/Input'
+import Input from '../../components/Input'
 import { loginScreenStyles } from './LoginScreen.styles'
-import Button from '../components/Button'
-import LineButton from '../components/LineButton'
+import Button from '../../components/Button/Button'
+import LineButton from '../../components/LineButton'
+import { signInUser } from '../../services/firebaseAuth'
+import Toast from '../../components/Toast/Toast'
 
 const LoginScreen = ( { navigation } ) => {
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
 
-    // const 
-
-    const testFunction = (text: String) => {
-        console.log(text)
+    const Login = async () => {
+        await signInUser( email, password )
     }
 
     return (
@@ -23,13 +23,13 @@ const LoginScreen = ( { navigation } ) => {
             <View style={ loginScreenStyles.container__heroContainer }>
                 <Image
                     style={ loginScreenStyles.container__heroContainer_Image }
-                    source={ require( '../assets/images/Login_Image.png' ) }
+                    source={ require( '../../assets/images/Login_Image.png' ) }
                     resizeMode='stretch'
                 />
 
                 <Image
                     style={ loginScreenStyles.container_heroContainer_TextImage }
-                    source={ require( '../assets/images/Login_Text_Top.png' )}
+                    source={ require( '../../assets/images/Login_Text_Top.png' )}
                 />
             </View>
 
@@ -54,7 +54,7 @@ const LoginScreen = ( { navigation } ) => {
                         <Button
                             label='Log In'
                             backgroundColor='green'
-                            onPress={ () => testFunction('hey') }
+                            onPress={ () => Login() }
                         />
                     </View>
 

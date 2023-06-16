@@ -12,7 +12,7 @@ export const myProfileScreenStyles = StyleSheet.create({
     },
     container__headerContainer_text: {
         fontSize: 64,
-        fontFamily: 'canvasreg',
+        fontFamily: 'canvasReg',
         color: '#E23E3E'
     },
     container__profileImageContainer: {

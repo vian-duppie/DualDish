@@ -4,6 +4,7 @@ export const globalStyles = StyleSheet.create({
     // Fill the available height
     flexGrowHeight: {
         flex: 1,
+        backgroundColor: '#FFFFFF'
     },
     // Padding Top For Android Status Bar
     androidSafeArea: {
