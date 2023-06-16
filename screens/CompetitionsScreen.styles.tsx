@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 export const competitionsScreenStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 35,
+        paddingHorizontal: 35,
         // backgroundColor: '#FFFFFF'
         // justifyContent: 'space-between'
     },

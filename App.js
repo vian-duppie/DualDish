@@ -1,8 +1,8 @@
 /* React Native */
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useRoute } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 /* Firebase */
 import { auth } from './firebase';
@@ -18,10 +18,13 @@ import CompetitionDetailScreen from './screens/CompetitionDetailScreen';
 
 /* Styling */
 import { globalStyles } from './utlities/GlobalStyles';
+import HeaderBar from './components/HeaderBar/HeaderBar';
 
 const Stack = createNativeStackNavigator()
 
 export default function App( { navigation } ) {
+    // const route = useRoute()
+
     return (
         <NavigationContainer>
             <View style={ 
@@ -32,36 +35,50 @@ export default function App( { navigation } ) {
                 }
             >
                 <SafeAreaView style={ globalStyles.flexGrowHeight }>
+                    {/* <HeaderBar/> */}
                     <Stack.Navigator
                         initialRouteName='splash'
                         screenOptions={{
-                            headerShown: false,
-                            contentStyle: { backgroundColor: '#FFFFFF' }
+                            contentStyle: { backgroundColor: '#FFFFFF' },
                         }}
                     >
-
                         <Stack.Screen
                             name='splash'
                             component={ SplashScreen }
+                            options={{
+                                headerShown: false
+                            }}
                         />
 
                         <Stack.Screen
                             name='login'
                             component={ LoginScreen }
+                            options={{
+                                headerShown: false
+                            }}
                         />
 
                         <Stack.Screen
                             name='register'
                             component={ RegisterScreen }
+                            options={{
+                                headerShown: false
+                            }}
                         />
                         
                         <Stack.Screen
                             name='myProfile'
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
                             component={ MyProfileScreen }
                         />
 
                         <Stack.Screen
                             name='competitions'
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
                             component={ CompetitionsScreen }
                         />
 

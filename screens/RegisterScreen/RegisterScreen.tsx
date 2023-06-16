@@ -1,16 +1,13 @@
-import { View, Text, Image, Dimensions, ImageBackground, ScrollView, Animated } from 'react-native'
-import React, { useRef, useState } from 'react'
+import { View, Text, Image, ScrollView } from 'react-native'
+import React, { useState } from 'react'
 import Input from '../../components/Input'
 import { registerScreenStyles } from './RegisterScreen.styles'
 import Button from '../../components/Button/Button'
 import LineButton from '../../components/LineButton'
 import { registerNewUser } from '../../services/firebaseAuth'
-import { emailCheck } from '../../utlities/utils'
 import Toast from '../../components/Toast/Toast'
 
 const RegisterScreen = ( { navigation } ) => {
-
-    const scrollY = useRef( new Animated.Value(0) ).current
 
     // Input State
     const [ username, setUsername ] = useState(String)
@@ -35,11 +32,9 @@ const RegisterScreen = ( { navigation } ) => {
             emailError: '',
             passwordError: '',
         })
-        console.log("This works")
     }
 
     const RegisterUser = async () => {
-        console.log("pressed")
         const { usernameError, emailError, passwordError } = errors
 
         if( username == '' ) {
@@ -61,8 +56,10 @@ const RegisterScreen = ( { navigation } ) => {
                 ...prevErrors,
                 passwordError: 'Please enter your password',
             }))
+        }
 
-            // return
+        if ( username == '' || email == '' || password == '' ) {
+            return
         }
 
         if( !usernameError && !emailError && !passwordError ) {
@@ -78,6 +75,7 @@ const RegisterScreen = ( { navigation } ) => {
                     passwordError: '',
                 })
             } catch ( err ) {
+                console.log(err)
                 setShowToast( true )
                 setToastMessage( 'There has been an error' )
                 setToastType( 'error' )
@@ -102,8 +100,6 @@ const RegisterScreen = ( { navigation } ) => {
                         passwordError: 'Please use a stronger password',
                     }))
                 }
-
-                return
             }
         }
     }
@@ -147,8 +143,8 @@ const RegisterScreen = ( { navigation } ) => {
                             label='Username'
                             placeholder='John Doe'
                             onChangeText={ 
-                                ( value: React.SetStateAction<string> ) => { 
-                                    setUsername( value ), 
+                                ( value: string ) => { 
+                                    setUsername( value.trim() ), 
                                     ClearErrors() 
                                 }
                             }
@@ -159,8 +155,8 @@ const RegisterScreen = ( { navigation } ) => {
                             label='Email Address'
                             placeholder='johndoe@gmail.com'
                             onChangeText={ 
-                                ( value: React.SetStateAction<string> ) => { 
-                                    setEmail( value ), 
+                                ( value: string ) => { 
+                                    setEmail( value.trim() ), 
                                     ClearErrors() 
                                 }
                             }
@@ -171,8 +167,8 @@ const RegisterScreen = ( { navigation } ) => {
                             label='Password'
                             placeholder='Enter your password'
                             onChangeText={ 
-                                ( value: React.SetStateAction<string> ) => { 
-                                    setPassword( value ), 
+                                ( value: string ) => { 
+                                    setPassword( value.trim() ), 
                                     ClearErrors() 
                                 }
                             }

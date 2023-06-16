@@ -71,7 +71,7 @@ const CompetitionsScreen = () => {
                 </Text>
 
                 <Text style={ { fontFamily:'poppinsReg', fontSize: 16, color: '#9C262E' } }>
-                    These are all competitions happening now!
+                    These are all the competitions happening now!
                 </Text>
             </View>
 
@@ -80,7 +80,14 @@ const CompetitionsScreen = () => {
                     Filter by
                 </Text>
 
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={ {gap: 15} }>
+                <ScrollView 
+                    horizontal 
+                    showsHorizontalScrollIndicator={false} 
+                    contentContainerStyle={ {gap: 15} }
+                    style={{ 
+                        overflow: 'visible'
+                    }}
+                >
                     <Tag
                         label='Category'
                         isSelected={false}

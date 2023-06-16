@@ -22,18 +22,18 @@ export const registerNewUser = ( username, email, password ) => {
     })
 }
 
-export const signInUser = async ( email, password ) => {
-        await signInWithEmailAndPassword( auth, email, password )
+export const signInUser = ( email, password ) => {
+    return new Promise( ( resolve, reject ) => {
+        signInWithEmailAndPassword( auth, email, password )
         .then( ( userCredential ) => {
             const user = userCredential.user
 
-            console.log("User signed in: " + user.email)
+            resolve()
         })
         .catch( ( err ) => {
-            const errorCode = err.code
-            const errorMessage = err.message
-            console.log( "This is the error: " + errorCode + ": " + errorMessage)
+            reject(err.code)
         })
+    })
 }
 
 export const signOutUser = () => {
