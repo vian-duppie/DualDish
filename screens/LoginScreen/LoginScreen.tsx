@@ -32,8 +32,6 @@ const LoginScreen = ( { navigation } ) => {
     const Login = async () => {
         const { emailError, passwordError } = errors
 
-        console.log('pressed')
-
         if( email == '' ) {
             setErrors(( prevErrors ) => ({
                 ...prevErrors,
@@ -86,8 +84,6 @@ const LoginScreen = ( { navigation } ) => {
                 }
             }
         } 
-
-        // await signInUser( email, password )
     }
 
     return (
@@ -147,13 +143,11 @@ const LoginScreen = ( { navigation } ) => {
                     </View>
 
                     <View style={ loginScreenStyles.container__actionsContainer }>
-                        <View>
                             <Button
                                 label='Log In'
                                 backgroundColor='green'
                                 onPress={ () => Login() }
                             />
-                        </View>
 
                         <View style={ loginScreenStyles.container__actionsContainer_lineButtonContainer }>
                             <Text>Don't have an account?</Text>

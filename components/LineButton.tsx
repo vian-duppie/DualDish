@@ -3,12 +3,12 @@ import { LineButtonStyles } from './LineButton.styles';
 
 const LineButton = ( props ) => {
     return(
-        <TouchableOpacity 
+        <Pressable 
             style={ LineButtonStyles.container }
             onPress={ props.onPress }
         >
             <Text style={ LineButtonStyles.text }>{ props.label || 'placeholder' }</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 

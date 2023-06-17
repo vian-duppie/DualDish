@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 import { ingredientCardStyles } from './IngredientCard.styles';
 
 const IngredientCard = ( props ) => {
-    const levels = [ 1, 2, 3, 4, 5, 6 ]
 
     return(
-        <View style={ ingredientCardStyles.container }>
-            <Text style={ { color: '#314B2F', fontSize: 16, fontFamily: 'poppinsMed' } }>Beef</Text>
-            <Text style={ { color: '#D46139', fontSize: 14, fontFamily: 'poppinsReg' } }>200g</Text>
+        <View style={[ ingredientCardStyles.container, { backgroundColor: props.background == 'gray' ? '#F4F4F6' : '#FFFFFF'} ]}>
+            <View style={{ flex: 1 }}>
+                <Text style={ { color: '#314B2F', fontSize: 16, fontFamily: 'poppinsMed', flexWrap: 'wrap' } }>{ props.name }</Text>
+            </View>
+            <Text style={ { color: '#D46139', fontSize: 14, fontFamily: 'poppinsReg' } }>{ props.weight }</Text>
         </View>
     );
 }

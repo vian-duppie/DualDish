@@ -8,6 +8,10 @@ export const ingredientCardStyles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         flex: 1,
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        gap: 20,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center' 
     },
 })
+

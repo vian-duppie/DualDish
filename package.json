@@ -15,6 +15,7 @@
     "@types/react": "~18.0.27",
     "expo": "~48.0.15",
     "expo-font": "~11.1.1",
+    "expo-image-picker": "^14.1.1",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.22.1",
     "link": "^1.5.1",
@@ -25,7 +26,8 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^13.4.0",
     "react-native-svg-transformer": "^1.0.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 
 export const buttonStyles = StyleSheet.create({
     container: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         backgroundColor: '#70B8A9',
         borderRadius: 100,
         paddingHorizontal: 30,
@@ -11,6 +11,7 @@ export const buttonStyles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: '500',
-        color: '#F4F4F6'
+        color: '#F4F4F6',
+        includeFontPadding: false
     },
 })

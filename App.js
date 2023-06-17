@@ -13,17 +13,18 @@ import SplashScreen from './screens/SplashScreen/SplashScreen';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import MyProfileScreen from './screens/MyProfileScreen/MyProfileScreen';
-import CompetitionsScreen from './screens/CompetitionsScreen';
-import CompetitionDetailScreen from './screens/CompetitionDetailScreen';
+import CompetitionsScreen from './screens/CompetitionsScreen/CompetitionsScreen';
+import CompetitionDetailScreen from './screens/CompetitionDetailScreen/CompetitionDetailScreen';
 
 /* Styling */
 import { globalStyles } from './utlities/GlobalStyles';
 import HeaderBar from './components/HeaderBar/HeaderBar';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
+import CompetitionEntryScreen from './screens/CompetitionEntryScreen/CompetitionEntryScreen';
 
 const Stack = createNativeStackNavigator()
 
 export default function App( { navigation } ) {
-    // const route = useRoute()
 
     return (
         <NavigationContainer>
@@ -65,6 +66,14 @@ export default function App( { navigation } ) {
                                 headerShown: false
                             }}
                         />
+
+                        <Stack.Screen
+                            name='home'
+                            component={ HomeScreen }
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
+                        />
                         
                         <Stack.Screen
                             name='myProfile'
@@ -85,6 +94,17 @@ export default function App( { navigation } ) {
                         <Stack.Screen
                             name='competitionDetail'
                             component={ CompetitionDetailScreen }
+                            options={{
+                                headerShown: false
+                            }}
+                        />
+
+                        <Stack.Screen
+                            name='competitionEntry'
+                            component={ CompetitionEntryScreen }
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
                         />
                     </Stack.Navigator>
                 </SafeAreaView>

@@ -1,11 +1,18 @@
 import { View, Text, ScrollView, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { competitionDetailScreenStyles } from './CompetitionDetailScreen.styles'
-import LevelIndicator from '../components/LevelIndicator'
-import Accordion from '../components/Accordion/Accordion'
-import Button from '../components/Button/Button'
+import LevelIndicator from '../../components/LevelIndicator'
+import Accordion from '../../components/Accordion/Accordion'
+import Button from '../../components/Button/Button'
 
-const CompetitionDetailScreen = () => {
+const CompetitionDetailScreen = ( { route, navigation } ) => {
+    const { id, competition } = route.params
+
+    useEffect(() => {
+        console.log(id)
+        console.log(competition)
+    }, [])
+
     return (
         <ScrollView 
             contentContainerStyle={ competitionDetailScreenStyles.container } 
@@ -13,24 +20,20 @@ const CompetitionDetailScreen = () => {
         >
             <View style={ competitionDetailScreenStyles.container__headerContainer }>
                 <Text style={ competitionDetailScreenStyles.container__headerContainer_text }>
-                    Taco Takedown
+                    { competition.title }
                 </Text>
             </View>
 
             <View style={ competitionDetailScreenStyles.container__descriptionContainer }>
                 <View style={ competitionDetailScreenStyles.container__descriptionContainer_description }>
                     <Text>
-                        Get ready for a 3 round fiesta with our Taco Takedown competition!
-                        {"\n"}{"\n"}
-                        You have 2 days to create the ultimate taco using the required and any additional ingredients of your choice.
-                        {"\n"}{"\n"}
-                        But be warned - each round gets more challenging than the last!
+                        { competition.description }
                     </Text>
                 </View>
 
                 <View style={ competitionDetailScreenStyles.container__descriptionContainer_category }>
                     <Text style={ { color: '#FFFFFF', fontSize: 12 } }>
-                        Mexican
+                        { competition.category }
                     </Text>
                 </View>
 
@@ -40,7 +43,7 @@ const CompetitionDetailScreen = () => {
                     </Text>
 
                     <LevelIndicator
-                        level={4}
+                        level={ competition.difficulty }
                     />
                 </View>
 
@@ -50,7 +53,7 @@ const CompetitionDetailScreen = () => {
                             Amount of entries allowed
                         </Text>
                         <Text style={ { fontSize: 40, fontFamily: 'canvasReg', color: '#70B8A9'} }>
-                            15
+                            { competition.entries_allowed }
                         </Text>
                     </View>
                     <View>
@@ -58,7 +61,7 @@ const CompetitionDetailScreen = () => {
                             Amount of entries recieved
                         </Text>
                         <Text style={ { fontSize: 40, fontFamily: 'canvasReg', color: '#70B8A9'} }>
-                            6
+                            { competition.entries.length }
                         </Text>
                     </View>
                 </View>
@@ -68,7 +71,9 @@ const CompetitionDetailScreen = () => {
                         Competition Rounds
                     </Text>
 
-                    <Accordion/>
+                    <Accordion
+                        items={ competition.round_challenges }
+                    />
                 </View>
 
                 <View style={ competitionDetailScreenStyles.container__leaderboardContainer}>
@@ -81,7 +86,7 @@ const CompetitionDetailScreen = () => {
                         <View style={ { marginTop: 30, alignItems: 'center' } }>
                             <Image
                                 style={ { width: 80, height: 80, borderRadius: 80/2 } }
-                                source={ require( '../assets/images/test.png' ) }
+                                source={ require( '../../assets/images/test.png' ) }
                                 resizeMode='cover'
                             />
 
@@ -93,7 +98,7 @@ const CompetitionDetailScreen = () => {
                         <View style={ { alignItems: 'center' } }>
                             <Image
                                 style={ { width: 100, height: 100, borderRadius: 100/2 } }
-                                source={ require( '../assets/images/test.png' ) }
+                                source={ require( '../../assets/images/test.png' ) }
                                 resizeMode='cover'
                             />
 
@@ -105,7 +110,7 @@ const CompetitionDetailScreen = () => {
                         <View style={ { marginTop: 30, alignItems: 'center' } }>
                             <Image
                                 style={ { width: 80, height: 80, borderRadius: 80/2 } }
-                                source={ require( '../assets/images/test.png' ) }
+                                source={ require( '../../assets/images/test.png' ) }
                                 resizeMode='cover'
                             />
 
@@ -121,6 +126,7 @@ const CompetitionDetailScreen = () => {
                     <Button
                         label='Enter Now'
                         backgroundColor='green'
+                        onPress={ () => navigation.navigate('competitionEntry', { competition: competition })}
                     />
                 </View>
             </View>

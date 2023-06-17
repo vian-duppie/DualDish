@@ -15,7 +15,7 @@ const MyProfileScreen = ( { navigation } ) => {
     const width = Dimensions.get('window').width
 
     const test = () => {
-        console.log('hey man')
+        // console.log('hey man')
         setUsernameIsEditable( !usernameIsEditable )
     }
 

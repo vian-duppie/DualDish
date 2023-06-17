@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { inputStyles } from './Input.styles'
 import EyeShow from './Svg/EyeShow'
@@ -12,10 +12,6 @@ const Input = ( props ) => {
     const changePasswordVisibility = () => {
         setShowPassword( !showPassword )
     }
-
-    useEffect(() => {
-        console.log(props.type)
-    }, [])
 
     return (
         <View
@@ -53,9 +49,10 @@ const Input = ( props ) => {
                                 ? 1
                                 : 0.3
                         }}
-                        multiline={ false }
+                        multiline={ props.multiline ? props.multiline : false }
                         defaultValue={ props.defaultValue }
                         editable={ props.isEditable }
+                        value={ props.value }
                     />
 
                     {
@@ -63,23 +60,23 @@ const Input = ( props ) => {
                         (
                             showPassword 
                             ? 
-                                <TouchableOpacity
+                                <Pressable
                                     style={ inputStyles.container__inputContainer_svg } 
                                     onPress={ changePasswordVisibility }
                                 >
                                     <EyeHide
                                         size={ 28 }
                                     />
-                                </TouchableOpacity>
+                                </Pressable>
                             : 
-                                <TouchableOpacity 
+                                <Pressable 
                                     style={ inputStyles.container__inputContainer_svg } 
                                     onPress={ changePasswordVisibility }
                                 >
                                     <EyeShow
                                         size={ 28 }
                                     />
-                                </TouchableOpacity>
+                                </Pressable>
                         )
                     }
                     {

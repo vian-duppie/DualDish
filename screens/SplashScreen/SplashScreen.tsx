@@ -46,7 +46,6 @@ const SplashScreen = ({ navigation }, props) => {
 
         const unsubscribe = onAuthStateChanged( auth, ( user ) => {
             if( fontsLoaded && user ) {
-                console.log("user found")
                 setTimeout(() => {
                     navigation.navigate('competitions')
                 }, 2000)

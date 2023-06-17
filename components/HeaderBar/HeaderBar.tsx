@@ -17,10 +17,11 @@ type HeaderStackParams = {
     competitions: undefined
     competitionCreate: undefined
     myProfile: undefined
+    competitionEntry: undefined
 }
 
 const HeaderBar = () => {
-    // Varialbes
+    // Variables
     const navigation = useNavigation<NativeStackNavigationProp<HeaderStackParams>>();
     const route = useRoute();
     const [ menuOpen, setMenuOpen ] = useState<Boolean>( false )

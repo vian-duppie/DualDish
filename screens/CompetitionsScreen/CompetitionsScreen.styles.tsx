@@ -26,6 +26,7 @@ export const competitionsScreenStyles = StyleSheet.create({
     container__competitionsCardsContainer: {
         flexGrow: 1,
         gap: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        overflow: 'visible'
     }
 })

@@ -1,11 +1,33 @@
-import { View, Text, Image, Dimensions } from 'react-native'
-import React from 'react'
+import { View, Text, Image, Dimensions, TouchableOpacity, Pressable } from 'react-native'
+import React, { useEffect } from 'react'
 import { CompetitionCardStyles } from './CompetitionCard.styles'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { NavigationContainer, useRoute, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { addCompetitionToCollection } from '../services/firebaseDb';
 
-const CompetitionCard = ( props ) => {
+type HeaderStackParams = {
+    competitionDetail: {
+        id: string
+        competition: any
+    }
+}
 
+const CompetitionCard = ( competition ) => {
+    const navigation = useNavigation<NativeStackNavigationProp<HeaderStackParams>>();
     const screenWidth = Dimensions.get('window').width
+
+    const DetailedCompetitionView = (routeName: keyof HeaderStackParams ) => {
+        let competitionData = competition.competition
+        navigation.navigate(
+            routeName,
+            {
+                id: competitionData.id,
+                competition: competitionData
+            }
+        )
+
+        // addCompetitionToCollection()
+    }
 
     return (
         <View style={ CompetitionCardStyles.container }>
@@ -31,7 +53,7 @@ const CompetitionCard = ( props ) => {
                     />
 
                     <Text style={ { fontFamily: 'canvasReg', fontSize: 20, color: '#314B2F'} }>
-                        { props.title || 'title' }
+                        { competition.title || 'title' }
                     </Text>
                 </View>
                 <View style={ 
@@ -63,7 +85,7 @@ const CompetitionCard = ( props ) => {
                                         } 
                                     }
                                 >
-                                    { props.days || '15'}
+                                    { competition.days || '15'}
                                 </Text>
                                 <Text style={ 
                                         { 
@@ -97,7 +119,7 @@ const CompetitionCard = ( props ) => {
                                         } 
                                     }
                                 >
-                                    { props.hours || '4' }
+                                    { competition.hours || '4' }
                                 </Text>
                                 <Text style={ 
                                         { 
@@ -131,7 +153,7 @@ const CompetitionCard = ( props ) => {
                                         } 
                                     }
                                 >
-                                    { props.minutes || '20'}
+                                    { competition.minutes || '20'}
                                 </Text>
                                 <Text style={ 
                                         { 
@@ -166,27 +188,31 @@ const CompetitionCard = ( props ) => {
                                     } 
                                 }
                             >
-                                { props.entries || '10' }
+                                { competition.entries != undefined ? competition.entries : 'None'}
                             </Text>
                         </View>
                     </View>
                 </View>
             </View>  
             <View style={ CompetitionCardStyles.container__bottomRow }>
-                <TouchableOpacity 
-                    style={ {alignSelf: 'flex-start' } }
-                    // onPress={}
+                <Pressable 
+                    style={ {
+                        alignSelf: 'flex-end', 
+                        height: 30, 
+                        justifyContent: 'center' 
+                    } }
+                    onPress={ () => DetailedCompetitionView( 'competitionDetail' ) }
                 >
                     <Text style={ 
                             { 
-                            color: '#D46139', 
-                            fontStyle: 'italic' 
+                                color: '#D46139', 
+                                fontStyle: 'italic' 
                             } 
                         }
                     >
                         View more
                     </Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>          
         </View>
     )

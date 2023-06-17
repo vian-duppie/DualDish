@@ -75,7 +75,6 @@ const RegisterScreen = ( { navigation } ) => {
                     passwordError: '',
                 })
             } catch ( err ) {
-                console.log(err)
                 setShowToast( true )
                 setToastMessage( 'There has been an error' )
                 setToastType( 'error' )

@@ -1,5 +1,14 @@
-import { Timestamp, addDoc, setDoc, doc, getDocs, collection } from "firebase/firestore"
+import { Timestamp, addDoc, setDoc, doc, getDocs, collection, where, getDoc, updateDoc, arrayUnion } from "firebase/firestore"
 import { db } from "../firebase"
+import { getStorage, ref, StorageReference, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { updateDo } from "typescript"
+
+export {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL
+}
 
 export const createUserInDb = async ( username, email, uid ) => {
     try {
@@ -30,6 +39,7 @@ export const addCompetitionToCollection = async( competition ) => {
             time_limit: 2,
             rounds: 2,
             difficulty: 3,
+            entries: [],
             round_challenges: [
                 {
                     title: "Classic Taco",
@@ -70,15 +80,54 @@ export const getAllCompetitions = async () => {
     try {
         let competitions = []
 
-        const snapshot = await getDocs( collection( db, "competitions" ))
+        const snapshot = await getDocs( collection(db, 'competitions' ) )
 
         snapshot.forEach( ( doc ) => {
-            competitions.push( doc.data() )
+            competitions.push({
+                ...doc.data(),
+                id: doc.id
+            })
         })
 
         return competitions
     } catch ( err ) {
         console.log(err)
-        return
+        return err
     }
+}
+
+export const addEntry = async ( entry, userId, competitionId ) => {
+    const docRef = doc( 
+        collection( db, 'users'),
+        userId
+    )
+
+    try {
+        const snapshot = await getDoc( docRef )
+        if (snapshot.exists()) {
+            const userEnteredCompetition = snapshot.data().entries.includes(competitionId)
+
+            if ( userEnteredCompetition ) {
+                return 'You already entered'
+            } else {
+                let updateResult = await updateDoc( docRef, {
+                    entries: arrayUnion(competitionId)
+                })
+
+                const createDocRef = await addDoc( 
+                    collection( db, 'entries' ),
+                    {
+                        ...entry,
+                        createAt: Timestamp.now()
+                    }
+                )
+            }
+            // console.log(createDocRef)
+        } else {
+            console.log("Document not found");
+        }
+    } catch ( err ) {
+        console.log(err)
+    }
+    // console.log(JSON.stringify(entry, null, 2));
 }
