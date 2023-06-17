@@ -88,7 +88,8 @@ const CompetitionEntryScreen = ( { route, navigation } ) => {
             dish_steps: dishStepsList,
             dish_ingredients: dishIngredientsList,
             dish_image: image,
-            dish_owner: userId
+            dish_owner: userId,
+            dish_category: competition.category
         }
 
         let result = await addEntry( entryData, userId, competition.id )
@@ -98,7 +99,9 @@ const CompetitionEntryScreen = ( { route, navigation } ) => {
             setToastMessage( result )
             setShowToast( true )
         } else {
-            console.log( result )
+            setToastType( 'success' )
+            setToastMessage( result )
+            setShowToast( true )
         }
     }
 
@@ -137,7 +140,7 @@ const CompetitionEntryScreen = ( { route, navigation } ) => {
 
                     <Input
                         label='Dish Description'
-                        placeholder='Enter the title of your dish'
+                        placeholder='Enter the description of your dish'
                         multiline={true}
                         onChangeText={ (value: string) => setDishDescription( value )}
                         value={ dishDescription }
@@ -242,7 +245,7 @@ const CompetitionEntryScreen = ( { route, navigation } ) => {
                     </View>
                 </View>
 
-                <View style={{ marginBottom: 30 }}>
+                <View style={{ marginBottom: 30, marginTop: 20 }}>
                     <View style={{ gap: 10 }}>
                         <Text style={{ 
                             fontSize: 16,

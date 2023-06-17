@@ -118,11 +118,13 @@ export const addEntry = async ( entry, userId, competitionId ) => {
                     collection( db, 'entries' ),
                     {
                         ...entry,
-                        createAt: Timestamp.now()
+                        createAt: Timestamp.now(),
+                        votess: 0
                     }
                 )
+
+                return 'Entry Added'
             }
-            // console.log(createDocRef)
         } else {
             console.log("Document not found");
         }

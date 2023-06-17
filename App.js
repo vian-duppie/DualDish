@@ -95,7 +95,7 @@ export default function App( { navigation } ) {
                             name='competitionDetail'
                             component={ CompetitionDetailScreen }
                             options={{
-                                headerShown: false
+                                header: () => <HeaderBar navigation={navigation}/>
                             }}
                         />
 
