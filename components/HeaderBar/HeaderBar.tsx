@@ -12,8 +12,10 @@ type HeaderRoute = {
     route: keyof HeaderStackParams
 }
 
+interface HomeInterface {}
+
 type HeaderStackParams = {
-    home: undefined
+    home?: HomeInterface 
     competitions: undefined
     competitionCreate: undefined
     myProfile: undefined

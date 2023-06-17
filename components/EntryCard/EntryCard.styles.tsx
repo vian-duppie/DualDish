@@ -1,35 +1,7 @@
 import { StyleSheet } from "react-native"
 
-export const homeScreenStyles = StyleSheet.create({
+export const entryCardStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingHorizontal: 24,
-        // backgroundColor: '#FFFFFF'
-        // justifyContent: 'space-between'
-    },
-    container__headerContainer: {
-        // Add styles
-    },
-    container__headerContainer_text: {
-        fontSize: 50,
-        fontFamily: 'canvasReg',
-        color: '#E23E3E',
-    },
-    container__introContainer: {
-        marginTop: 20,
-        marginBottom: 30
-    },
-    container__filterContainer: {
-        gap: 15,
-        marginBottom: 40,
-    },
-    container__competitionsCardsContainer: {
-        flexGrow: 1,
-        gap: 20,
-        paddingBottom: 20,
-        overflow: 'visible'
-    }, 
-    entryContainer: {
         backgroundColor: '#F4F4F6',
         paddingVertical: 10,
         paddingHorizontal: 10,
@@ -40,8 +12,7 @@ export const homeScreenStyles = StyleSheet.create({
         marginBottom: 20,
         // flexGrow: 1,
         justifyContent: 'space-between'
-    },
-    entryContainer_title: {
+    },entryContainer_title: {
         fontFamily: 'canvasReg',
         fontSize: 18
     },

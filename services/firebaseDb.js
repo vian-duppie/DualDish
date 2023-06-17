@@ -1,7 +1,6 @@
-import { Timestamp, addDoc, setDoc, doc, getDocs, collection, where, getDoc, updateDoc, arrayUnion } from "firebase/firestore"
+import { Timestamp, addDoc, setDoc, doc, getDocs, collection, where, getDoc, updateDoc, arrayUnion, FieldValue, arrayRemove } from "firebase/firestore"
 import { db } from "../firebase"
 import { getStorage, ref, StorageReference, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { updateDo } from "typescript"
 
 export {
     getStorage,
@@ -96,6 +95,27 @@ export const getAllCompetitions = async () => {
     }
 }
 
+export const getAllEntries = async () => {
+    try {
+        let entries = []
+
+        const snapshot = await getDocs( collection( db, 'entries' ) )
+
+        
+        snapshot.forEach( ( doc ) => {
+            entries.push({
+                ...doc.data(),
+                id: doc.id
+            })
+        })
+
+        return entries
+    } catch ( err ) {
+        console.log( err )
+        return err
+    }
+}
+
 export const addEntry = async ( entry, userId, competitionId ) => {
     const docRef = doc( 
         collection( db, 'users'),
@@ -119,7 +139,7 @@ export const addEntry = async ( entry, userId, competitionId ) => {
                     {
                         ...entry,
                         createAt: Timestamp.now(),
-                        votess: 0
+                        dish_votes: []
                     }
                 )
 
@@ -131,5 +151,60 @@ export const addEntry = async ( entry, userId, competitionId ) => {
     } catch ( err ) {
         console.log(err)
     }
-    // console.log(JSON.stringify(entry, null, 2));
+}
+
+export const likeEntry = async ( entryId, userId ) => {
+    try {
+        const docRef = doc(
+            collection( db, 'entries'),
+            entryId
+        )
+    
+        await updateDoc( docRef, {
+            dish_votes: arrayUnion(userId)
+        })
+
+        // Fetch the updated document
+        const updatedDoc = await getDoc(docRef);
+        if (updatedDoc.exists()) {
+            return {
+                ...updatedDoc.data(),
+                id: updatedDoc.id
+            }
+        } else {
+            console.log('Document not found');
+            return null;
+        }
+    } catch ( err ) {
+        console.log( err )
+    }
+}
+
+export const removeLikeEntry = async ( entryId, userId ) => {
+    try {
+        console.log("USERID: " + userId)
+        console.log("ENTRYID: " + entryId)
+        const docRef = doc(
+            collection( db, 'entries'),
+            entryId
+        )
+    
+        await updateDoc( docRef, {
+            dish_votes: arrayRemove(userId)
+        })
+
+        // Fetch the updated document
+        const updatedDoc = await getDoc(docRef);
+        if (updatedDoc.exists()) {
+            return {
+                ...updatedDoc.data(),
+                id: updatedDoc.id
+            }
+        } else {
+            console.log('Document not found');
+            return null;
+        }
+    } catch ( err ) {
+        console.log( "ERROR: " + err )
+    }
 }

@@ -89,7 +89,8 @@ const CompetitionEntryScreen = ( { route, navigation } ) => {
             dish_ingredients: dishIngredientsList,
             dish_image: image,
             dish_owner: userId,
-            dish_category: competition.category
+            dish_category: competition.category,
+            dish_owner_username: competition.username
         }
 
         let result = await addEntry( entryData, userId, competition.id )

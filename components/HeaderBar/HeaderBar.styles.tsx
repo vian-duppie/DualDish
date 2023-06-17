@@ -5,7 +5,7 @@ export const headerBarStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 35,
+        paddingHorizontal: 24,
         paddingVertical: 15,
     },
     container__menuContainer: {
