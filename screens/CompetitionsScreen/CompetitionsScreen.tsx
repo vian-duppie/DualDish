@@ -56,7 +56,7 @@ const CompetitionsScreen = ( { navigation } ) => {
                             </Text>
                         </View>
 
-                        <View 
+                        {/* <View 
                             style={ competitionsScreenStyles.container__filterContainer }
                         >
                             <Text style={ { fontFamily:'poppinsMed', fontSize: 16, color: '#314B2F' } }>
@@ -85,7 +85,7 @@ const CompetitionsScreen = ( { navigation } ) => {
                                     isSelected={false}
                                 />
                             </ScrollView>
-                        </View>
+                        </View> */}
                     </>
                 }
                 showsVerticalScrollIndicator={ false }

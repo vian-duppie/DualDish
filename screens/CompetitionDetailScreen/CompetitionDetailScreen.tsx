@@ -95,7 +95,7 @@ const CompetitionDetailScreen = ( { route, navigation } ) => {
 
                 <View style={ competitionDetailScreenStyles.container__roundsContainer }>
                     <Text style={ { fontSize: 20, fontFamily: 'poppinsMed', color: '#314B2F'} }>
-                        Competition Rounds
+                        Competition Challenge
                     </Text>
 
                     <Accordion

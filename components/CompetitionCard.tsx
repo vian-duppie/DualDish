@@ -12,12 +12,12 @@ type HeaderStackParams = {
     }
 }
 
-const CompetitionCard = ( competition ) => {
+const CompetitionCard = ( {competition} ) => {
     const navigation = useNavigation<NativeStackNavigationProp<HeaderStackParams>>();
     const screenWidth = Dimensions.get('window').width
 
     const DetailedCompetitionView = (routeName: keyof HeaderStackParams ) => {
-        let competitionData = competition.competition
+        let competitionData = competition
         navigation.navigate(
             routeName,
             {
@@ -27,11 +27,81 @@ const CompetitionCard = ( competition ) => {
         )
     }
 
-    const [ competitionData, setCompetitionData] = useState( competition.competition )
+    const [ competitionData, setCompetitionData] = useState( competition )
     useEffect(() => {
-        console.log('heytihnaskifg niasf nasigf i')
-        setCompetitionData( competition.competition )
+        setCompetitionData( competition )
     }, [competition])
+
+    const [days, setDays] = useState(0)
+    const [hours, setHours] = useState(0)
+    const [minutes, setMinutes] = useState(0)
+
+    useEffect(() => {
+        const calcTime = () => {
+            const createdDate = competition.createdAt.toDate();
+            const deadlineDate = new Date(createdDate.getTime());
+            
+            // Calculate the deadline by adding the time limit in milliseconds
+            const timeLimitMs = competition.time_limit * 24 * 60 * 60 * 1000;
+            deadlineDate.setTime(deadlineDate.getTime() + timeLimitMs);
+            
+            // Calculate the remaining time in milliseconds relative to the current time
+            const remainingTime = deadlineDate.getTime() - Date.now();
+            
+            // Check if the deadline has passed
+            if (remainingTime < 0) {
+                setDays( 0 )
+                setHours( 0)
+                setMinutes( 0)
+              return;
+            }
+            
+            // Calculate the remaining days, hours, and minutes
+            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            setDays( days )
+            setHours( hours)
+            setMinutes( minutes)
+
+            console.log("I AM RUNNING EVERY 10 Seconds")
+            console.log('days: ' + days)
+            console.log('hours: ' + hours)
+            console.log('minutes: ' + minutes)
+        }
+
+        calcTime()
+        const intervalId = setInterval( calcTime, 60000)
+
+        return () => clearInterval(intervalId)
+    }, [competition])
+
+    // useEffect(() => {
+    //     const calculateTimeLeft = () => {
+    //       const createdAt = competitionData.createdAt;
+    //       const timeLimitInDays = competitionData.time_limit;
+    
+    //       const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    //       const currentTime = new Date().getTime();
+    //       const createdAtTime = createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000;
+    //       const timeDifference = createdAtTime + timeLimitInDays * millisecondsPerDay - currentTime;
+    
+    //       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    //       const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //       const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    
+    //       console.log('Time Left:');
+    //       console.log('Days:', days);
+    //       console.log('Hours:', hours);
+    //       console.log('Minutes:', minutes);
+    //     };
+    
+    //     const timer = setInterval(calculateTimeLeft, 10000);
+    
+    //     return () => {
+    //       clearInterval(timer);
+    //     };
+    //   }, [competitionData.createdAt, competitionData.time_limit]);
 
     return (
         <View style={ CompetitionCardStyles.container }>
@@ -89,7 +159,7 @@ const CompetitionCard = ( competition ) => {
                                         } 
                                     }
                                 >
-                                    { competition.days || '15'}
+                                    { days }
                                 </Text>
                                 <Text style={ 
                                         { 
@@ -123,7 +193,7 @@ const CompetitionCard = ( competition ) => {
                                         } 
                                     }
                                 >
-                                    { competition.hours || '4' }
+                                    { hours }
                                 </Text>
                                 <Text style={ 
                                         { 
@@ -157,7 +227,7 @@ const CompetitionCard = ( competition ) => {
                                         } 
                                     }
                                 >
-                                    { competition.minutes || '20'}
+                                    { minutes }
                                 </Text>
                                 <Text style={ 
                                         { 

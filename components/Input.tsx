@@ -53,6 +53,7 @@ const Input = ( props ) => {
                         defaultValue={ props.defaultValue }
                         editable={ props.isEditable }
                         value={ props.value }
+                        keyboardType={ props.keyboardtype }
                     />
 
                     {

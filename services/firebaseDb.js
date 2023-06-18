@@ -384,3 +384,21 @@ export const getAllUserEntries = async ( dishOwner ) => {
 //         console.log( err )
 //     }
 //   }
+
+
+export const addCompetition = async ( data ) => {
+    try {
+        const docRef = await addDoc(collection(db, 'competitions'), {
+            ...data,
+            createdAt: Timestamp.now()
+        });
+        // console.log('New competition document created with ID:', docRef.id);
+        console.log('New competition document created with ID:', data);
+        // return docRef.id;
+        return true
+    } catch (error) {
+        console.error('Error creating competition document:', error);
+        return false
+    }
+    
+}

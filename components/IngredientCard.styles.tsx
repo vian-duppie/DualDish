@@ -5,7 +5,7 @@ export const ingredientCardStyles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 15,
         borderRadius: 12,
-        flex: 1,
+        // flex: 1,
         justifyContent: 'space-between',
         gap: 20,
         flexDirection: 'row',

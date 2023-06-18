@@ -13,10 +13,14 @@ const ProfileScreen = () => {
     const levels = [ 1, 2, 2, 3 ]
     const [ entries, setEntries ] = useState([])
     const [ won, setWon ] = useState(0)
+    const [ user, setUser ] = useState('')
 
     useFocusEffect(
         useCallback(() =>{
             let user = getCurrentUser().uid
+            let username = getCurrentUser().displayName
+            console.log("USER: " + username)
+            setUser( username )
             getEntries( user )
         },[])
     )
@@ -55,7 +59,7 @@ const ProfileScreen = () => {
                         resizeMode='contain'
                     />
 
-                    <Text style={ profileScreenStyles.userDetailsText }>Username</Text>
+                    <Text style={ profileScreenStyles.userDetailsText }>{user}</Text>
                 </View>
 
                 <View style={ profileScreenStyles.levelContainer }>
