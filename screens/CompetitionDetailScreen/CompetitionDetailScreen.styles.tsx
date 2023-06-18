@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 export const competitionDetailScreenStyles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        paddingHorizontal: 35,
+        paddingHorizontal: 24,
         // justifyContent: 'space-between'
     },
     container__headerContainer: {

@@ -1,7 +1,7 @@
 import { View, Text, Image, Dimensions, TouchableOpacity, Pressable } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { CompetitionCardStyles } from './CompetitionCard.styles'
-import { NavigationContainer, useRoute, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useRoute, useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { addCompetitionToCollection } from '../services/firebaseDb';
 
@@ -27,6 +27,12 @@ const CompetitionCard = ( competition ) => {
         )
     }
 
+    const [ competitionData, setCompetitionData] = useState( competition.competition )
+    useEffect(() => {
+        console.log('heytihnaskifg niasf nasigf i')
+        setCompetitionData( competition.competition )
+    }, [competition])
+
     return (
         <View style={ CompetitionCardStyles.container }>
             <View style={ CompetitionCardStyles.container__topRow }>
@@ -51,7 +57,7 @@ const CompetitionCard = ( competition ) => {
                     />
 
                     <Text style={ { fontFamily: 'canvasReg', fontSize: 20, color: '#314B2F'} }>
-                        { competition.title || 'title' }
+                        { competitionData.title || 'title' }
                     </Text>
                 </View>
                 <View style={ 
@@ -186,7 +192,7 @@ const CompetitionCard = ( competition ) => {
                                     } 
                                 }
                             >
-                                { competition.entries != undefined ? competition.entries : 'None'}
+                                { competitionData.entries.length > 0 ? competitionData.entries.length : 'None'}
                             </Text>
                         </View>
                     </View>

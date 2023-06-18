@@ -7,12 +7,21 @@ import { useFocusEffect } from '@react-navigation/native'
 import { getAllCompetitions } from '../../services/firebaseDb'
 
 const CompetitionsScreen = ( { navigation } ) => { 
-    const [ competitions, setCompetitions ] = useState<any>( [] )
+    const [ competitions, setCompetitions ] = useState( [] )
+
+    const [entries, setEntries] = useState([])
+    
+    useFocusEffect(
+        useCallback(() =>{
+            console.log("LOADING")
+            console.log(competitions)
+            getCompetitions()
+        },[])
+    )
 
     useEffect( () => {
-        console.log('hey')
         getCompetitions()
-        console.log(competitions)
+        // console.log(competitions)
     }, [])
 
     const getCompetitions = async () => {
@@ -85,10 +94,6 @@ const CompetitionsScreen = ( { navigation } ) => {
                 renderItem={ ( { item, index } ) => (
                     <CompetitionCard
                         competition={ item }
-                        key={ index }
-                        title={ item.title }
-                        entries={ item.entries.length }
-                        navigation={ navigation }
                     />
                 )}
             />

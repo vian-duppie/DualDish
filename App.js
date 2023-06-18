@@ -21,6 +21,8 @@ import { globalStyles } from './utlities/GlobalStyles';
 import HeaderBar from './components/HeaderBar/HeaderBar';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import CompetitionEntryScreen from './screens/CompetitionEntryScreen/CompetitionEntryScreen';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import CreateCompetitionScreen from './screens/CreateCompetitionScreen/CreateCompetitionScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -74,14 +76,22 @@ export default function App( { navigation } ) {
                                 header: () => <HeaderBar navigation={navigation}/>
                             }}
                         />
-                        
+
                         <Stack.Screen
+                            name='profile'
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
+                            component={ ProfileScreen }
+                        />
+                        
+                        {/* <Stack.Screen
                             name='myProfile'
                             options={{
                                 header: () => <HeaderBar navigation={navigation}/>
                             }}
                             component={ MyProfileScreen }
-                        />
+                        /> */}
 
                         <Stack.Screen
                             name='competitions'
@@ -89,6 +99,14 @@ export default function App( { navigation } ) {
                                 header: () => <HeaderBar navigation={navigation}/>
                             }}
                             component={ CompetitionsScreen }
+                        />
+
+                        <Stack.Screen
+                            name='competitionCreate'
+                            options={{
+                                header: () => <HeaderBar navigation={navigation}/>
+                            }}
+                            component={ CreateCompetitionScreen }
                         />
 
                         <Stack.Screen

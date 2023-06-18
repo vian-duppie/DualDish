@@ -5,12 +5,14 @@ import { getAllEntries } from '../../services/firebaseDb'
 import HeartOutline from '../../components/Svg/HeartOutline'
 import HeartFill from '../../components/Svg/HeartFill'
 import EntryCard from '../../components/EntryCard/EntryCard'
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
     const [entries, setEntries] = useState([])
-
+    
     useEffect(() => {
         getEntries()
+        console.log("HOME SCREEN LOADED")
     }, [])
 
     const getEntries = async () => {
@@ -56,11 +58,7 @@ const HomeScreen = () => {
                 renderItem={({ item, index }) => (
                     <EntryCard
                         entry={ item }
-                        // url={ item.dish_image }
-                        // title={ item.dish_title }
-                        // category={ item.dish_category }
-                        // username={ item.dish_owner_username }
-                        // votes={ item.dish_votes }
+                        // navigation={navigation}
                     />
                 )}
             />

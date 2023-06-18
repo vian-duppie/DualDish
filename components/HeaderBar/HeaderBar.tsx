@@ -12,14 +12,17 @@ type HeaderRoute = {
     route: keyof HeaderStackParams
 }
 
-interface HomeInterface {}
+// interface HomeInterface {}
+// interface CompetitionsInterface {}
 
 type HeaderStackParams = {
-    home?: HomeInterface 
+    home: undefined 
     competitions: undefined
     competitionCreate: undefined
     myProfile: undefined
     competitionEntry: undefined
+    testing: undefined
+    profile: undefined
 }
 
 const HeaderBar = () => {
@@ -50,7 +53,6 @@ const HeaderBar = () => {
       return null;
     }
 
-
     // Navigate to Screen and close menu
     const handleNavigation = ( routeName: keyof HeaderStackParams ) => {
         navigation.navigate( routeName )
@@ -71,9 +73,9 @@ const HeaderBar = () => {
             title: 'Create Compeition',
             route: 'competitionCreate'
         },
-        {   
+        {
             title: 'My Profile',
-            route: 'myProfile'
+            route: 'profile'
         }
     ]
 
