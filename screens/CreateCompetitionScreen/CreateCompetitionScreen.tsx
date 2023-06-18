@@ -75,6 +75,9 @@ const CreateCompetitionScreen = ( { navigation } ) => {
         const shuffledStr = characters.join('');
 
         if( !compImage) {
+            setShowToast( true )
+            setToastMessage( 'Upload an image' )
+            setToastType( 'Error' )
             return
         }
 

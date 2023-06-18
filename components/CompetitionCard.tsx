@@ -29,6 +29,7 @@ const CompetitionCard = ( {competition} ) => {
 
     const [ competitionData, setCompetitionData] = useState( competition )
     useEffect(() => {
+        console.log(competition.image)
         setCompetitionData( competition )
     }, [competition])
 
@@ -76,33 +77,6 @@ const CompetitionCard = ( {competition} ) => {
         return () => clearInterval(intervalId)
     }, [competition])
 
-    // useEffect(() => {
-    //     const calculateTimeLeft = () => {
-    //       const createdAt = competitionData.createdAt;
-    //       const timeLimitInDays = competitionData.time_limit;
-    
-    //       const millisecondsPerDay = 24 * 60 * 60 * 1000;
-    //       const currentTime = new Date().getTime();
-    //       const createdAtTime = createdAt.seconds * 1000 + createdAt.nanoseconds / 1000000;
-    //       const timeDifference = createdAtTime + timeLimitInDays * millisecondsPerDay - currentTime;
-    
-    //       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    //       const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //       const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    
-    //       console.log('Time Left:');
-    //       console.log('Days:', days);
-    //       console.log('Hours:', hours);
-    //       console.log('Minutes:', minutes);
-    //     };
-    
-    //     const timer = setInterval(calculateTimeLeft, 10000);
-    
-    //     return () => {
-    //       clearInterval(timer);
-    //     };
-    //   }, [competitionData.createdAt, competitionData.time_limit]);
-
     return (
         <View style={ CompetitionCardStyles.container }>
             <View style={ CompetitionCardStyles.container__topRow }>
@@ -122,7 +96,7 @@ const CompetitionCard = ( {competition} ) => {
                                 aspectRatio: 1, 
                             } 
                         }
-                        source={ require( '../assets/images/Splash_Screen_Background.png' ) }
+                        source={{uri: competition.image }}
                         resizeMode='contain'
                     />
 
