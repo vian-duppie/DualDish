@@ -297,11 +297,8 @@ export const getCompetition = async ( competitionId ) => {
                 if ( entrySnapshot.exists() ) {
                     const entryData = entrySnapshot.data()
                     if (entryData && entryData.dish_votes) {
-                        console.log('hey this is the entries')
                         return entryData
-                        // return entryData;
                     }
-                    // console.log(snapshot.data())
                 }
                 return null
             })
@@ -323,11 +320,7 @@ export const getCompetition = async ( competitionId ) => {
             if (sortedEntries.length > 2) {
                 topThreeEntries.push(sortedEntries[2]); // Third most votes
             }
-            // console.log('what')
 
-            // console.log("This will return the comp data")
-
-            // console.log(snapshot.data())
             return {
                 competition: competitionData,
                 leaderboard: topThreeEntries
@@ -364,27 +357,6 @@ export const getAllUserEntries = async ( dishOwner ) => {
         return err
     }
 }
-
-
-//   export const getCompetition = async ( competitionId ) => {
-//     const docRef = doc(
-//         collection( db, 'competitions' ),   
-//         competitionId
-//     )
-
-//     try {
-//         let snapshot = await getDoc( docRef )
-
-//         if( snapshot.exists() ) {
-//             console.log(snapshot.data())
-//         } else {
-//             return 'Document does not exist'
-//         }
-//     } catch ( err ) {
-//         console.log( err )
-//     }
-//   }
-
 
 export const addCompetition = async ( data ) => {
     try {

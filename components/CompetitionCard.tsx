@@ -75,7 +75,7 @@ const CompetitionCard = ( {competition} ) => {
         const intervalId = setInterval( calcTime, 60000)
 
         return () => clearInterval(intervalId)
-    }, [competition])
+    }, [])
 
     return (
         <View style={ CompetitionCardStyles.container }>

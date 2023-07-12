@@ -49,7 +49,7 @@ const ProfileScreen = () => {
         <>
             <ScrollView style={ profileScreenStyles.container }>
                 <View style={ profileScreenStyles.usernameContainer }>
-                    <Text style={ profileScreenStyles.usernameContainer__Text }>Monique</Text>
+                    <Text style={ profileScreenStyles.usernameContainer__Text }>{user}</Text>
                 </View>
 
                 <View style={ profileScreenStyles.userDetails }>
@@ -59,7 +59,7 @@ const ProfileScreen = () => {
                         resizeMode='contain'
                     />
 
-                    <Text style={ profileScreenStyles.userDetailsText }>{user}</Text>
+                    {/* <Text style={ profileScreenStyles.userDetailsText }>{user}</Text> */}
                 </View>
 
                 <View style={ profileScreenStyles.levelContainer }>
